@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 93c6d8c8dcc9ead4fa79ea5cc19b90e3
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - normalEnemyPrefab: {fileID: 2508300152979970379, guid: 6381bc6bbc5558144bdd2afbc4de5864, type: 3}
+  - bossEnemyPrefab: {fileID: 6491503956496768695, guid: 4b85d7b9d50c32343ae3cbc35178ea8b, type: 3}
+  - minionEnemyPrefab: {fileID: 3495647851103263279, guid: d7994a534c7e0e24da8dd26ac23b8a9e, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
