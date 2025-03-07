@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public abstract class Enemy : MonoBehaviour
 {
     protected IFallBehavior fallBehavior;
+    private float destroyThreshold = -6f;
 
     // Assign the fall behavior dynamically
     public void SetFallBehavior(IFallBehavior fallBehavior)
@@ -15,6 +17,10 @@ public abstract class Enemy : MonoBehaviour
     }
 
     void Update(){
+        if (transform.position.y < destroyThreshold)
+        {
+            SceneManager.LoadScene("EndScene");
+        }
     }
 
     // Call the Fall method for the current behavior
