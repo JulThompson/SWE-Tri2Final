@@ -7,7 +7,7 @@ public class NormalFall : IFallBehavior
         Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            rb.gravityScale = 5f;
+            rb.gravityScale = 1f;
         }
     }
 }

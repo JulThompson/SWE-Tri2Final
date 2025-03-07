@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Security.Cryptography;
 using UnityEngine;
 
@@ -7,6 +8,9 @@ public class PlayerController : MonoBehaviour
 {
     private PlayerState state;
     public Rigidbody2D rb;
+    public GameObject projectilePrefab;
+
+
     public int borderLeft;
     public int borderRight;
     public int velocity;
@@ -14,7 +18,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        state = new PlayerStateNormal(this, rb);
+        state = new PlayerStateNormal(this, rb, projectilePrefab);
         borderLeft = -10;
         borderRight = 10;
         velocity = 4;
@@ -38,6 +42,13 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector2(0, 0);
         }
+        if (Input.GetKeyDown("space"))
+        {
+            UnityEngine.Debug.Log("space hit");
+            state.handleSpace();
+        }
+
+        state.advanceState();
     }
 
     public void setState(PlayerState s)
