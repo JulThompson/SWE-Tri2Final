@@ -15,7 +15,6 @@ public abstract class Enemy : MonoBehaviour
     }
 
     void Update(){
-        Debug.Log("update is running");
     }
 
     // Call the Fall method for the current behavior
@@ -23,7 +22,6 @@ public void Fall()
 {
     if (fallBehavior != null)
     {
-        Debug.Log("Calling fall behavior for " + gameObject.name);
         fallBehavior.Fall(gameObject); // Calling the fall method of the behavior
     }
     else
