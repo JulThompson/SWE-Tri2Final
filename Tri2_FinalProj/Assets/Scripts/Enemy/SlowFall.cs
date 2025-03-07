@@ -8,7 +8,7 @@ public class SlowFall : IFallBehavior
         Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            rb.gravityScale = 0.25f;
+            rb.gravityScale = 0.1f;
         }
     }
 }
