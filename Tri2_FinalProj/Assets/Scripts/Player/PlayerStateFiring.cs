@@ -7,15 +7,19 @@ public class PlayerStateFiring : PlayerState
     private PlayerController player;
     private Rigidbody2D rb;
     private GameObject projectilePrefab;
+    private GameObject speedPrefab;
+    private PlayerState returnState;
 
     private int cooldown;
 
-    public PlayerStateFiring(PlayerController player, Rigidbody2D rb, int c, GameObject prefab)
+    public PlayerStateFiring(PlayerController player, Rigidbody2D rb, int c, GameObject prefab, GameObject sprefab, PlayerState rstate)
     {
         this.player = player;
         this.rb = rb;
         this.cooldown = c;
         this.projectilePrefab = prefab;
+        this.speedPrefab = sprefab;
+        this.returnState = rstate;
     }
 
     public void handleSpace()
@@ -33,7 +37,7 @@ public class PlayerStateFiring : PlayerState
         cooldown--;
         if (cooldown <= 0 )
         {
-            player.setState(new PlayerStateNormal(player, rb, projectilePrefab));
+            player.setState(returnState);
         }
     }
 }

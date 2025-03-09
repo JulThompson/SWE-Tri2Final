@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - SpeedUp
+  - FIreUp
+  - FireUp
   layers:
   - Default
   - TransparentFX
