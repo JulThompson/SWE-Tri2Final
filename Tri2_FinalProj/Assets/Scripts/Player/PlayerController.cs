@@ -12,10 +12,14 @@ public class PlayerController : MonoBehaviour
     public GameObject projectilePrefab;
     public GameObject speedPrefab;
 
-
     public int borderLeft;
     public int borderRight;
     public int velocity;
+
+    private ICommand moveRightCommand;
+    private ICommand moveLeftCommand;
+    private ICommand stopMovementCommand;
+    private ICommand shootCommand;
 
     void Start()
     {
@@ -24,29 +28,32 @@ public class PlayerController : MonoBehaviour
         borderLeft = -10;
         borderRight = 10;
         velocity = 4;
+
+        moveRightCommand = new MoveRightCommand(this);
+        moveLeftCommand = new MoveLeftCommand(this);
+        stopMovementCommand = new StopMovementCommand(this);
+        shootCommand = new ShootCommand(state);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown("right"))
+        if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            rb.velocity = new Vector2(velocity, 0);
+            moveRightCommand.Execute();
         }
-        if (Input.GetKeyDown("left"))
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            rb.velocity = new Vector2(-velocity, 0);
+            moveLeftCommand.Execute();
         }
-        if (!(Input.GetKeyDown("left")) && Input.GetKeyUp("right"))
+
+        if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
         {
-            rb.velocity = new Vector2(0, 0);
+            stopMovementCommand.Execute();
         }
-        if (!(Input.GetKeyDown("right")) && Input.GetKeyUp("left"))
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            rb.velocity = new Vector2(0, 0);
-        }
-        if (Input.GetKeyDown("space"))
-        {
-            state.handleSpace();
+            shootCommand.Execute();
         }
 
         state.advanceState();
