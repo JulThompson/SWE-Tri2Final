@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.ComponentModel.Design;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using UnityEngine;
 
@@ -20,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private ICommand moveLeftCommand;
     private ICommand stopMovementCommand;
     private ICommand shootCommand;
+    private ICommand powerShootCommand;
 
     void Start()
     {
@@ -32,7 +35,8 @@ public class PlayerController : MonoBehaviour
         moveRightCommand = new MoveRightCommand(this);
         moveLeftCommand = new MoveLeftCommand(this);
         stopMovementCommand = new StopMovementCommand(this);
-        shootCommand = new ShootCommand(state);
+        //shootCommand = new ShootCommand(state);
+        powerShootCommand = new ShootCommand(new PlayerStateFireup(this, rb, projectilePrefab, speedPrefab, 500));
     }
 
     void Update()
@@ -53,7 +57,17 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            shootCommand.Execute();
+            UnityEngine.Debug.Log("state: " + state.GetType());
+            if (state.GetType() == typeof(PlayerStateFireup))
+            {
+                powerShootCommand.Execute();
+            }
+            else
+            {
+                UnityEngine.Debug.Log("state: " + state.GetType());
+                shootCommand = new ShootCommand(state);
+                shootCommand.Execute();
+            }
         }
 
         state.advanceState();
@@ -69,8 +83,7 @@ public class PlayerController : MonoBehaviour
         if (velocity == 10)
         {
             velocity = 4;
-        } else
-        {
+        } else if (velocity == 4) {
             velocity = 10;
         }
     }
