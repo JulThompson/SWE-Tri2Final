@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Security.Cryptography;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private PlayerState state;
     public Rigidbody2D rb;
     public GameObject projectilePrefab;
+    public GameObject speedPrefab;
 
 
     public int borderLeft;
@@ -18,7 +20,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        state = new PlayerStateNormal(this, rb, projectilePrefab);
+        state = new PlayerStateNormal(this, rb, projectilePrefab, speedPrefab);
         borderLeft = -10;
         borderRight = 10;
         velocity = 4;
@@ -44,7 +46,6 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown("space"))
         {
-            UnityEngine.Debug.Log("space hit");
             state.handleSpace();
         }
 
@@ -54,5 +55,32 @@ public class PlayerController : MonoBehaviour
     public void setState(PlayerState s)
     {
         state = s;
+    }
+
+    public void changeVelocity()
+    {
+        if (velocity == 10)
+        {
+            velocity = 4;
+        } else
+        {
+            velocity = 10;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag.Equals("FireUp"))
+        {
+            UnityEngine.Debug.Log("fireup");
+            Destroy(other.gameObject);
+            state = new PlayerStateFireup(this, rb, projectilePrefab, speedPrefab, 500);
+        }
+        if (other.gameObject.tag.Equals("SpeedUp"))
+        {
+            UnityEngine.Debug.Log("speedup");
+            Destroy(other.gameObject);
+            state = new PlayerStateSpeedup(this, rb, projectilePrefab, speedPrefab, 500);
+        }
     }
 }
