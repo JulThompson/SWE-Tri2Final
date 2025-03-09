@@ -16,7 +16,7 @@ public class ProjectileController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.gameObject.name.Equals("SpaceShipNormal"))
+        if (other.gameObject.tag.Equals("Enemy"))
         {
             Destroy(other.gameObject);
             Destroy(this.gameObject);

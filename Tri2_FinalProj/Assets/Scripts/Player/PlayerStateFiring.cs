@@ -24,12 +24,7 @@ public class PlayerStateFiring : PlayerState
 
     public void handleSpace()
     {
-        //cannot fire again
-    }
-
-    public void handleCollision()
-    {
-        //TODO
+        UnityEngine.Debug.Log("cooldown...");
     }
 
     public void advanceState()

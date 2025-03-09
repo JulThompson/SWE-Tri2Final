@@ -29,14 +29,8 @@ public class PlayerStateNormal : PlayerState
         player.setState(new PlayerStateFiring(player, rb, 100, projectilePrefab, speedPrefab, this));
     }
 
-    public void handleCollision()
-    {
-        //TODO
-    }
-
     public void advanceState()
     {
-        //TODO
     }
 
 }
