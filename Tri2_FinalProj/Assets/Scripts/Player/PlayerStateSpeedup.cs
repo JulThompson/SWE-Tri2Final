@@ -36,11 +36,6 @@ public class PlayerStateSpeedup : PlayerState
         player.setState(new PlayerStateFiring(player, rb, 100, projectilePrefab, speedPrefab, this));
     }
 
-    public void handleCollision()
-    {
-        //TODO
-    }
-
     public void advanceState()
     {
         cooldown--;
