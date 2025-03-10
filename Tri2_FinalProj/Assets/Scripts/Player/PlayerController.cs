@@ -9,7 +9,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private PlayerState state;
+    public PlayerState state;
     public Rigidbody2D rb;
     public GameObject projectilePrefab;
     public GameObject speedPrefab;
@@ -18,11 +18,11 @@ public class PlayerController : MonoBehaviour
     public int borderRight;
     public int velocity;
 
-    private ICommand moveRightCommand;
-    private ICommand moveLeftCommand;
-    private ICommand stopMovementCommand;
-    private ICommand shootCommand;
-    private ICommand powerShootCommand;
+    public ICommand moveRightCommand;
+    public ICommand moveLeftCommand;
+    public ICommand stopMovementCommand;
+    public ICommand shootCommand;
+    public ICommand powerShootCommand;
 
     void Start()
     {

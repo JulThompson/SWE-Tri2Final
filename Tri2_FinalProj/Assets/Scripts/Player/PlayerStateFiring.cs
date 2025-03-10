@@ -10,7 +10,7 @@ public class PlayerStateFiring : PlayerState
     private GameObject speedPrefab;
     private PlayerState returnState;
 
-    private int cooldown;
+    public int cooldown;
 
     public PlayerStateFiring(PlayerController player, Rigidbody2D rb, int c, GameObject prefab, GameObject sprefab, PlayerState rstate)
     {
